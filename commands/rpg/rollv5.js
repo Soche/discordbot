@@ -1,14 +1,6 @@
 const { RichEmbed} = require("discord.js");
 const { stripIndents} = require("common-tags");
 const { dieRoll, lumiaPost} = require("../../functions.js");
-const { config } = require("dotenv");
-
-config({
-  path:__dirname + "/.env"
-});
-const lumiatoken = process.env.LUMIATOKEN;
-const apiurl =  process.env.APIURLTOKEN;
-const apost = `${apiurl}${lumiatoken}`;
 
 module.exports = {
   name: "rollv5",
@@ -124,6 +116,6 @@ module.exports = {
     .addField("**Hunger**",` > ${hungerdice}`,true);
     message.channel.send(resultFiltered);
     message.channel.send(embed);
-    lumiaPost(apost, "chat-reaction", lumiacode)
+    lumiaPost("chat-reaction", lumiacode)
   }
 }

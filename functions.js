@@ -1,3 +1,11 @@
+const { config } = require("dotenv");
+
+config({
+  path:__dirname + "/.env"
+});
+const lumiatoken = process.env.LUMIATOKEN;
+const apiurl =  process.env.APIURL;
+const apost = `${apiurl}${lumiatoken}`;
 
 module.exports = {
   getMember: function(message, toFind = ''){
@@ -81,7 +89,7 @@ module.exports = {
 
       return emos[letter];
   },
-  lumiaPost: function(apost, ltype, lvalue){
+  lumiaPost: function(ltype, lvalue){
     const axios = require("axios").default;
     axios.post(apost, { type: ltype, value: lvalue })
 	.then((res) => {
