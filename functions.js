@@ -4,8 +4,10 @@ config({
   path:__dirname + "/.env"
 });
 const lumiatoken = process.env.LUMIATOKEN;
-const apiurl =  process.env.APIURL;
-const apost = `${apiurl}${lumiatoken}`;
+const gapiurl =  process.env.GAPIURL;
+const papiurl =  process.env.PAPIURL;
+const gapost = `${gapiurl}${lumiatoken}`;
+const papost = `${papiurl}${lumiatoken}`;
 
 module.exports = {
   getMember: function(message, toFind = ''){
@@ -91,12 +93,29 @@ module.exports = {
   },
   lumiaPost: function(ltype, lvalue){
     const axios = require("axios").default;
-    axios.post(apost, { type: ltype, value: lvalue })
+    axios.post(papost, { type: ltype, value: lvalue })
 	.then((res) => {
 		console.log('res: ', res.data);
 	}).catch((err) => {
 		console.log('err: ', err);
 	});
+  },
+  lumiaGet: function(){
+    return new Promise((resolve, reject) => {
+    const axios = require("axios").default;
+    axios.get(gapost)
+    .then((res) => {
+      //console.log(gapost);
+      //console.log('res: ', res.data);
+      resolve(res.data);
+    }).catch((err) => {
+      console.log('err: ', err);
+      reject(err);
+    });
+  });
   }
+ 
+  
+  
 
 }
